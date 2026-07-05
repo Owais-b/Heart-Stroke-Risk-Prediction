@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Heart Stroke Risk Predictor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>❤️ AI Heart Stroke Risk Prediction</h1>
+
+    <p class="subtitle">
+        Enter the patient's details to estimate the stroke risk using our AI model.
+    </p>
+
+    <form action="/predict" method="POST">
+
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <label>Age</label>
+        <input type="number" name="age" step="0.1" placeholder="Enter Age" required>
+
+        <label>Hypertension</label>
+        <select name="hypertension" required>
+            <option value="">Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Heart Disease</label>
+        <select name="heart_disease" required>
+            <option value="">Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Ever Married</label>
+        <select name="ever_married" required>
+            <option value="">Select</option>
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Work Type</label>
+        <select name="work_type" required>
+            <option value="">Select</option>
+            <option>Private</option>
+            <option>Self-employed</option>
+            <option>Govt_job</option>
+            <option>children</option>
+            <option>Never_worked</option>
+        </select>
+
+        <label>Residence Type</label>
+        <select name="Residence_type" required>
+            <option value="">Select</option>
+            <option>Urban</option>
+            <option>Rural</option>
+        </select>
+
+        <label>Average Glucose Level</label>
+        <input type="number" step="0.01"
+               name="avg_glucose_level"
+               placeholder="Example: 95.5"
+               required>
+
+        <label>BMI</label>
+        <input type="number"
+               step="0.1"
+               name="bmi"
+               placeholder="Example: 27.3"
+               required>
+
+        <label>Smoking Status</label>
+        <select name="smoking_status" required>
+            <option value="">Select</option>
+            <option>never smoked</option>
+            <option>formerly smoked</option>
+            <option>smokes</option>
+            <option>Unknown</option>
+        </select>
+
+        <button type="submit">
+            🔍 Predict Stroke Risk
+        </button>
+
+    </form>
+
+    {% if prediction_text %}
+
+    <div class="result">
+
+        <h2>{{ prediction_text }}</h2>
+
+        <h3>
+            Prediction Probability
+        </h3>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width:{{ probability }}%">
+                {{ probability }}%
+            </div>
+
+        </div>
+
+        <h3>Recommendation</h3>
+
+        <p>{{ recommendation }}</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
